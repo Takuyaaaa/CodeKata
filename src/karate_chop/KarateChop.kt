@@ -31,10 +31,12 @@ class KarateChop {
                 // number which is located at middle and will be compared to targetNum
                 val middleNum = originalList[middleIndex]
 
+                // found!
                 if (middleNum == targetNum) {
                     return middleIndex
                 }
 
+                // when only one number left and that is not matched to targetNum
                 if (manipulatedList.size == 1 && middleNum != targetNum) {
                     return NOT_FOUND
                 }
