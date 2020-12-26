@@ -4,6 +4,7 @@ import kotlin.math.ceil
 
 class KarateChop {
     companion object {
+        // int value returned when targetNum is not found
         private const val NOT_FOUND = -1
 
         /**
