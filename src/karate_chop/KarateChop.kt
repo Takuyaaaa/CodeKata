@@ -1,6 +1,5 @@
 package com.code_kata.karate_chop
 
-import com.code_kata.karate_chop.KarateChop.Companion.calculateMiddleIndex
 import kotlin.math.ceil
 
 class KarateChop {
@@ -11,7 +10,6 @@ class KarateChop {
          * calculate list`s index located at middle
          */
         private fun List<Int>.calculateMiddleIndex(): Int {
-            var r = this.lastIndex
             return ceil(this.lastIndex.toDouble().div(2.0)).toInt()
         }
 
@@ -40,19 +38,17 @@ class KarateChop {
 
 
                 // when only two numbers left and neither of them are not matched to targetNum
-                if (manipulatedList.size == 2 &&
-                    manipulatedList[0] != targetNum &&
-                    manipulatedList.last() != targetNum) return NOT_FOUND
+                if (manipulatedList.size == 2 && !manipulatedList.contains(targetNum)) return NOT_FOUND
 
 
-                // when targetNum is bigger than middleNum, pick upper half as manipulatedList
+                // when middleNum is smaller than targetNum, pick upper half as manipulatedList
                 if (middleNum < targetNum) {
                     manipulatedList = manipulatedList.slice(middleIndex..manipulatedList.lastIndex)
                     middleIndex += manipulatedList.calculateMiddleIndex()
                     continue
                 }
 
-                // when targetNum is smaller than middleNum, pick lower half as manipulatedList
+                // when middleNum is bigger than targetNum, pick lower half as manipulatedList
                 if (middleNum > targetNum) {
                     manipulatedList = manipulatedList.slice(0..middleIndex)
                     middleIndex -= manipulatedList.calculateMiddleIndex()
@@ -64,32 +60,35 @@ class KarateChop {
         /**
          * chop a list by binary search recursively
          */
-        fun recursiveChop(targetNum: Int, list: List<Int>, index: Int = 0): Int {
+        fun recursiveChop(targetNum: Int, list: List<Int>, offsetIndex: Int = 0): Int {
             // no calculation needed if originalList is empty
             if (list.isEmpty()) return NOT_FOUND
 
             var middleIndex = list.calculateMiddleIndex()
             val middleNum = list[middleIndex]
-            middleIndex += index
+            // plus offsetIndex to reflect original list`s index position
+            middleIndex += offsetIndex
 
             // found!
             if (middleNum == targetNum) return middleIndex
 
+            // when only two numbers left and neither of them are not matched to targetNum
             if (list.size <= 2 && !list.contains(targetNum)) return NOT_FOUND
 
-            // when targetNum is bigger than middleNum, call recursiveChop on upper part
+            // when middleNum is smaller than targetNum, call recursiveChop on upper part
             if (middleNum < targetNum) {
                 val upperPart = list.slice(middleIndex..list.lastIndex)
-                var r = list.lastIndex-middleIndex
+                // pass offsetIndex param to reflect original list`s index position
                 return recursiveChop(targetNum, upperPart, list.size-upperPart.size)
             }
 
-            // when targetNum is smaller than middleNum, call recursiveChop on lower part
+            // when middleNum is bigger than targetNum, call recursiveChop on lower part
             if (middleNum > targetNum) {
                 val lowerPart = list.slice(0 until middleIndex)
                 return recursiveChop(targetNum, lowerPart)
             }
 
+            // when none of the above conditions met, return NOT_FOUND int value
             return NOT_FOUND
         }
     }
