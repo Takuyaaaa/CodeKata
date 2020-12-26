@@ -17,12 +17,9 @@ class KarateChop {
             }
 
             // no calculation needed if originalList is empty
-            if (originalList.isEmpty()) {
-                return NOT_FOUND
-            }
+            if (originalList.isEmpty()) return NOT_FOUND
 
             var middleIndex = originalList.calculateMiddleIndex()
-
             // prepare a list which would be manipulated through the while process below
             var manipulatedList = originalList
 
@@ -32,20 +29,18 @@ class KarateChop {
                 val middleNum = originalList[middleIndex]
 
                 // found!
-                if (middleNum == targetNum) {
-                    return middleIndex
-                }
+                if (middleNum == targetNum) return middleIndex
+
 
                 // when only one number left and that is not matched to targetNum
-                if (manipulatedList.size == 1 && middleNum != targetNum) {
-                    return NOT_FOUND
-                }
+                if (manipulatedList.size == 1 && middleNum != targetNum) return NOT_FOUND
+
 
                 // when only two numbers left and neither of them are not matched to targetNum
                 if (manipulatedList.size == 2 &&
-                    manipulatedList[0] != targetNum && manipulatedList.last() != targetNum) {
-                    return NOT_FOUND
-                }
+                    manipulatedList[0] != targetNum &&
+                    manipulatedList.last() != targetNum) return NOT_FOUND
+
 
                 // when targetNum is bigger than middleNum, pick upper half as manipulatedList
                 if (middleNum < targetNum) {
