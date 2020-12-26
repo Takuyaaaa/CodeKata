@@ -1,6 +1,7 @@
 package karate_chop
 
 import com.code_kata.karate_chop.KarateChop.Companion.iteratorChop
+import com.code_kata.karate_chop.KarateChop.Companion.recursiveChop
 import org.junit.Test
 import kotlin.test.assertEquals
 
@@ -8,6 +9,11 @@ class KarateChopTest {
     @Test
     fun testIteratorChop() {
         chop(::iteratorChop)
+    }
+
+    @Test
+    fun testRecursiveChop() {
+        chop(::recursiveChop)
     }
 
     /**
