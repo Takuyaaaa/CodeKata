@@ -1,5 +1,7 @@
 package com.code_kata.karate_chop
 
+import kotlin.math.ceil
+
 class KarateChop {
     companion object {
         // chop a list by iterating numbers
@@ -8,7 +10,7 @@ class KarateChop {
                 return -1
             }
 
-            var middleIndex = list.lastIndex/2
+            var middleIndex = ceil(list.lastIndex.toDouble().div(2.0)).toInt()
             var middleNumber = list[middleIndex]
             var modList = list
 
@@ -17,20 +19,24 @@ class KarateChop {
                     return middleIndex
                 }
 
-                if (middleIndex == 0 || middleIndex == list.lastIndex && list[middleIndex] != targetNum) {
+                if (modList.size == 1 && middleNumber != targetNum) {
+                    return -1
+                }
+
+                if (modList.size == 2 && modList[0] != targetNum && modList.last() != targetNum) {
                     return -1
                 }
 
                 if (middleNumber < targetNum) {
-                    val upperPart = list.slice(middleIndex..list.lastIndex)
-                    middleIndex += (upperPart.size / 2)
+                    modList = modList.slice(middleIndex..modList.lastIndex)
+                    middleIndex += ceil(modList.lastIndex.toDouble().div(2.0)).toInt()
                     middleNumber = list[middleIndex]
                     continue
                 }
 
                 if (middleNumber > targetNum) {
-                    val lowerPart = list.slice(0..middleIndex)
-                    middleIndex = lowerPart.lastIndex/2
+                    modList = modList.slice(0..middleIndex)
+                    middleIndex -= ceil(modList.lastIndex.toDouble().div(2.0)).toInt()
                     middleNumber = list[middleIndex]
                     continue
                 }

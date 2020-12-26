@@ -14,9 +14,6 @@ class KarateChopTest {
      * refer a chop function passed as argument and execute that
      */
     private fun chop(chopFunction: (Int, List<Int>) -> Int) {
-
-        assertEquals(-1, chopFunction(4, listOf(1, 3, 5, 7)))
-
         assertEquals(-1, chopFunction(3, listOf()))
         assertEquals(-1, chopFunction(3, listOf(1)))
         assertEquals(0,  chopFunction(1, listOf(1)))
@@ -36,7 +33,7 @@ class KarateChopTest {
         assertEquals(-1, chopFunction(0, listOf(1, 3, 5, 7)))
         assertEquals(-1, chopFunction(2, listOf(1, 3, 5, 7)))
         assertEquals(-1, chopFunction(8, listOf(1, 3, 5, 7)))
-//        assertEquals(-1, chopFunction(4, listOf(1, 3, 5, 7)))
+        assertEquals(-1, chopFunction(4, listOf(1, 3, 5, 7)))
         assertEquals(-1, chopFunction(6, listOf(1, 3, 5, 7)))
     }
 }
