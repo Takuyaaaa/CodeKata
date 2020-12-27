@@ -15,14 +15,13 @@ class KarateChop {
             while (low <= high) {
                 val mid = (low + high).ushr(1)
                 val midVal = list[mid]
-                val cmp = compareValues(midVal, targetNum)
+                val result = compareValues(midVal, targetNum)
 
-                if (cmp < 0)
-                    low = mid + 1
-                else if (cmp > 0)
-                    high = mid - 1
-                else
-                    return mid
+                when {
+                    result < 0 -> low = mid + 1
+                    result > 0 -> high = mid - 1
+                    else -> return mid
+                }
             }
             return NOT_FOUND
         }
@@ -38,18 +37,20 @@ class KarateChop {
 
             val mid = (low + high).ushr(1)
             val midVal = list[mid]
-            val cmp = compareValues(midVal, targetNum)
+            val result = compareValues(midVal, targetNum)
 
-            if (cmp < 0) {
-                low = mid + 1
-                return recursiveChop(targetNum, list.slice(low..list.lastIndex), offsetIndex.plus(low))
+            return when {
+                result < 0 -> {
+                    low = mid + 1
+                    // pass offsetIndex param to adjust original index position
+                    recursiveChop(targetNum, list.slice(low..list.lastIndex), offsetIndex.plus(low))
+                }
+                result > 0 -> {
+                    high = mid - 1
+                    recursiveChop(targetNum, list.slice(0 .. high))
+                }
+                else -> mid.plus(offsetIndex)
             }
-            else if (cmp > 0) {
-                high = mid - 1
-                return recursiveChop(targetNum, list.slice(0 .. high))
-            }
-
-            return mid.plus(offsetIndex)
         }
 
         /**
@@ -57,7 +58,9 @@ class KarateChop {
          */
         fun libraryChop(targetNum: Int, list: List<Int>): Int {
             val result =  list.binarySearch(targetNum)
+            // when targetNum is not found, need to return NOT_FOUND int value
             if (result < 0) return NOT_FOUND
+
             return result
         }
     }
