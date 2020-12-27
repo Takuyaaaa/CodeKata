@@ -1,5 +1,6 @@
 package karate_chop
 
+import com.code_kata.karate_chop.KarateChop.Companion.libraryChop
 import com.code_kata.karate_chop.KarateChop.Companion.iteratorChop
 import com.code_kata.karate_chop.KarateChop.Companion.recursiveChop
 import org.junit.Test
@@ -14,6 +15,11 @@ class KarateChopTest {
     @Test
     fun testRecursiveChop() {
         chop(::recursiveChop)
+    }
+
+    @Test
+    fun testLibraryChop() {
+        chop(::libraryChop)
     }
 
     /**
