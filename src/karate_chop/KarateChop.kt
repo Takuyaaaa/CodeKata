@@ -13,9 +13,9 @@ class KarateChop {
             var high = list.lastIndex
 
             while (low <= high) {
-                val mid = (low + high).ushr(1)
-                val midVal = list[mid]
-                val result = compareValues(midVal, targetNum)
+                val mid = (low + high).div(2)
+                val midNum = list[mid]
+                val result = compareValues(midNum, targetNum)
 
                 when {
                     result < 0 -> low = mid + 1
@@ -35,9 +35,9 @@ class KarateChop {
 
             if (list.isEmpty()) return NOT_FOUND
 
-            val mid = (low + high).ushr(1)
-            val midVal = list[mid]
-            val result = compareValues(midVal, targetNum)
+            val mid = (low + high).div(2)
+            val midNum = list[mid]
+            val result = compareValues(midNum, targetNum)
 
             return when {
                 result < 0 -> {
