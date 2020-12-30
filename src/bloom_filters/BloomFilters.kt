@@ -5,6 +5,8 @@ import java.io.File
 
 class BloomFilters(bytes_size: Int, file: File) {
     private val bloomArray = IntArray(bytes_size)
+    private val MARKED = 1
+    private val HEX_RADIUS = 16
 
     /**
      * read a file passed when constructing the class
@@ -16,8 +18,8 @@ class BloomFilters(bytes_size: Int, file: File) {
             .forEach{
                 val(md5HashNum, sha256HashNum) = generateHashes(it)
 
-                bloomArray[md5HashNum] = 1
-                bloomArray[sha256HashNum] = 1
+                bloomArray[md5HashNum] = MARKED
+                bloomArray[sha256HashNum] = MARKED
             }
     }
 
@@ -35,7 +37,7 @@ class BloomFilters(bytes_size: Int, file: File) {
      * chunk each consecutive hexadecimal numbers and return first one as Int
      */
     private fun String.firstHexNum(): Int {
-        return this.chunked(1)[0].toInt(16)
+        return this.chunked(1)[0].toInt(HEX_RADIUS)
     }
 
     /**
@@ -45,7 +47,8 @@ class BloomFilters(bytes_size: Int, file: File) {
         val(md5HashNum, sha256HashNum) = generateHashes(word)
 
         return when {
-            bloomArray[md5HashNum] == 1 && bloomArray[sha256HashNum] == 1 -> true
+            bloomArray[md5HashNum] == MARKED
+                    && bloomArray[sha256HashNum] == MARKED -> true
             else -> false
         }
     }
