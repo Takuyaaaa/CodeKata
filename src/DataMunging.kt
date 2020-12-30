@@ -1,4 +1,4 @@
-package com.code_kata.data_munging
+package com.code_kata
 
 import java.io.File
 import kotlin.math.absoluteValue

@@ -1,6 +1,4 @@
-package bloom_filters
-
-import com.code_kata.bloom_filters.BloomFilters
+import com.code_kata.BloomFilters
 import org.junit.Test
 import java.io.File
 import kotlin.test.assertFalse

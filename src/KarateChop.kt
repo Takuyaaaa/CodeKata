@@ -1,4 +1,4 @@
-package com.code_kata.karate_chop
+package com.code_kata
 
 class KarateChop {
     companion object {

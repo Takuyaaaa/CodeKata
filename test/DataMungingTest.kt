@@ -1,8 +1,6 @@
-package data_munging
-
-import com.code_kata.data_munging.DataMunging.Companion.calculateScoreSpread
-import com.code_kata.data_munging.DataMunging.Companion.calculateTemperatureSpread
-import com.code_kata.data_munging.DataMunging.Companion.readFileAndProcessDataWith
+import com.code_kata.DataMunging.Companion.calculateScoreSpread
+import com.code_kata.DataMunging.Companion.calculateTemperatureSpread
+import com.code_kata.DataMunging.Companion.readFileAndProcessDataWith
 import org.junit.Test
 import java.io.File
 import kotlin.test.assertEquals

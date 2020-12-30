@@ -1,4 +1,4 @@
-package com.code_kata.bloom_filters
+package com.code_kata
 
 import org.apache.commons.codec.digest.DigestUtils
 import java.io.File
