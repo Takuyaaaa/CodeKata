@@ -5,21 +5,24 @@ import com.code_kata.data_munging.DataMunging.Companion.calculateTemperatureSpre
 import com.code_kata.data_munging.DataMunging.Companion.readFileAndProcessDataWith
 import org.junit.Test
 import java.io.File
+import kotlin.test.assertEquals
 
 class DataMungingTest {
     @Test
-    fun testPrintTheSmallestTemperatureSpread() {
-        val smallestTemperatureSpread = File("resources/weather.dat")
+    fun testCalculateTemperatureSpread() {
+        val temperatureSpread = File("resources/weather.dat")
                 .readFileAndProcessDataWith(::calculateTemperatureSpread)
 
-        println(smallestTemperatureSpread)
+        assertEquals("14", temperatureSpread["date"])
+        assertEquals("2", temperatureSpread["spread"])
     }
 
     @Test
-    fun testPrintTheSmallestScoreSpread() {
-        val smallestScoreSpread = File("resources/football.dat")
+    fun testCalculateScoreSpread() {
+        val scoreSpread = File("resources/football.dat")
                 .readFileAndProcessDataWith(::calculateScoreSpread)
 
-        print(smallestScoreSpread)
+        assertEquals("Aston_Villa", scoreSpread["team"])
+        assertEquals("1", scoreSpread["spread"])
     }
 }

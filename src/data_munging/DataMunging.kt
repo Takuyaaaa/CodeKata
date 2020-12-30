@@ -26,7 +26,7 @@ class DataMunging {
                     .mapNotNull {
                         operation(it)
                     }
-                    // have smallest spread date as first element and pick it to print
+                    // have smallest spread date as first element and pick it to return
                     .sortedBy { it["spread"]?.toInt() }[0]
         }
 
@@ -44,7 +44,7 @@ class DataMunging {
                 // extract temperature data to calculate spread
                 val maxTemp = line[1].toInt()
                 val minTemp = line[2].toInt()
-                // make a map containing date and spread as keys
+
                 mapOf("date" to date, "spread" to maxTemp.minus(minTemp).toString())
             } else null
         }
@@ -63,7 +63,7 @@ class DataMunging {
                 // extract score data to calculate spread
                 val scoreFor = line[6].toInt()
                 val scoreAgainst = line[8].toInt()
-                // make a map containing team and spread as keys
+
                 mapOf("team" to team, "spread" to scoreFor.minus(scoreAgainst).absoluteValue.toString())
             } else null
         }
