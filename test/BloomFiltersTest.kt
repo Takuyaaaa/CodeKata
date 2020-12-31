@@ -6,7 +6,7 @@ import kotlin.test.assertTrue
 
 class BloomFiltersTest {
     @Test
-    fun test() {
+    fun testBloomFilters() {
         val bloomFilter = BloomFilters(16, File("resources/wordlist.txt"))
 
         // words written in wordlist.txt
