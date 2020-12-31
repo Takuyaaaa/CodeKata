@@ -13,8 +13,7 @@ class BloomFilters(bytes_size: Int, file: File) {
      * and store hash info of words written in the file at bloomArray
      */
     init {
-        file.bufferedReader()
-            .readLines()
+        file.readLines()
             .forEach{
                 val(md5HashNum, sha256HashNum) = generateHashes(it)
 

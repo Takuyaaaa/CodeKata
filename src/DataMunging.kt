@@ -20,8 +20,7 @@ class DataMunging {
          * read file and process its data in mapNotNull part with a method passed as argument
          */
         fun File.readFileAndProcessDataWith(operation: KFunction1<String, Map<String, String>?>): Map<String, String> {
-            return this.bufferedReader()
-                    .readLines()
+            return this.readLines()
                     .drop(1).dropLast(1)
                     .mapNotNull {
                         operation(it)

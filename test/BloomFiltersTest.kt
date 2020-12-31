@@ -7,13 +7,13 @@ import kotlin.test.assertTrue
 class BloomFiltersTest {
     @Test
     fun testBloomFilters() {
-        val bloomFilter = BloomFilters(16, File("resources/wordlist.txt"))
+        val bloomFilter = BloomFilters(16, File("resources/wordlist_for_bloomfilters.txt"))
 
-        // words written in wordlist.txt
+        // words written in wordlist_for_bloomfilters.txt
         assertTrue{ bloomFilter.includes("trying") }
         assertTrue{ bloomFilter.includes("engineer!") }
 
-        // words not written in wordlist.txt
+        // words not written in wordlist_for_bloomfilters.txt
         assertFalse{ bloomFilter.includes("noway") }
         assertFalse{ bloomFilter.includes("irrelevant") }
     }
