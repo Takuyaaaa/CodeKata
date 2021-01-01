@@ -12,12 +12,9 @@ class Anagrams {
              // groupBy sorted string used for anagrams
              .groupBy { it.first }
              .allAnagrams()
-             // print the most repeated anagrams by referring second element of each Pair
-             .forEach { anagramList ->
-                 val wordList = anagramList.map { anagramPair ->
-                     anagramPair.second
-                 }
-                 println(wordList)
+             // print all words which has its anagrams
+             .forEach {
+                 println(it)
              }
         }
 
@@ -42,10 +39,23 @@ class Anagrams {
         /**
          * return words which has its anagram in a list
          */
-        private fun Map<String, List<Pair<String, String>>>.allAnagrams(): List<List<Pair<String, String>>> {
+        private fun Map<String, List<Pair<String, String>>>.allAnagrams(): List<List<String>> {
             return this.toList()
+                    // filter out words which does not have its anagram
                     .filter { it.second.count() > 1 }
+                    // remove pair's first element which is used for counting
                     .map { it.second }
+                    // extract words string date from pair
+                    .map { it.extractWords() }
+        }
+
+        /**
+         * extract words string date from pair
+         */
+        private fun List<Pair<String, String>>.extractWords(): List<String> {
+            return this.map {
+                it.second
+            }
         }
     }
 }
