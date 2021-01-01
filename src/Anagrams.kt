@@ -5,19 +5,18 @@ import java.io.File
 class Anagrams {
     companion object {
         /**
-         * execute processes and print the most repeated anagrams
+         * execute processes and print all anagrams
          */
-        fun File.printAllAnagrams() {
-            this.addUsedWordsInfo()
+        fun File.extractAllAnagrams(): List<List<String>> {
+            return this.addUsedWordsInfo()
              // groupBy sorted string used for anagrams
              .groupBy { it.first }
              .allAnagrams()
-             // print all words which has its anagrams
-             .forEach { println(it) }
         }
 
         /**
          * add words info as pair`s first element
+         * i.e. (aaghmr, graham)
          */
         private fun File.addUsedWordsInfo(): List<Pair<String, String>> {
             return this.readLines()
@@ -35,7 +34,7 @@ class Anagrams {
         }
 
         /**
-         * return words which has its anagram in a list
+         * return all words which has its anagram in a list
          */
         private fun Map<String, List<Pair<String, String>>>.allAnagrams(): List<List<String>> {
             return this.toList()
