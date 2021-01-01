@@ -13,9 +13,7 @@ class Anagrams {
              .groupBy { it.first }
              .allAnagrams()
              // print all words which has its anagrams
-             .forEach {
-                 println(it)
-             }
+             .forEach { println(it) }
         }
 
         /**
