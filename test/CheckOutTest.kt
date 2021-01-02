@@ -34,4 +34,26 @@ class CheckOutTest {
         assertEquals(190, co.price("AAABBD"))
         assertEquals(190, co.price("DABABA"))
     }
+
+    @Test
+    fun testScan() {
+        val co = CheckOut(mapOf("A" to 50, "B" to 30, "C" to 20, "D" to 15),
+                listOf(Triple("A", 3, 130), Triple("B", 2, 45)))
+        assertEquals(  0, co.total())
+
+        co.scan("A");
+        assertEquals( 50, co.total())
+
+        co.scan("B");
+        assertEquals( 80, co.total())
+
+        co.scan("A");
+        assertEquals(130, co.total())
+
+        co.scan("A");
+        assertEquals(160, co.total())
+
+        co.scan("B");
+        assertEquals(175, co.total)
+    }
 }
