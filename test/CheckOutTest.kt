@@ -14,7 +14,6 @@ import kotlin.test.assertEquals
  */
 class CheckOutTest {
     @Test
-
     fun testPrice() {
         val co = CheckOut(mutableMapOf("A" to 50, "B" to 30, "C" to 20, "D" to 15),
         listOf(Triple("A", 3, 130), Triple("B", 2, 45)))
