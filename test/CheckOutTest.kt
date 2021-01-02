@@ -2,10 +2,8 @@ import com.code_kata.CheckOut
 import org.junit.Test
 import kotlin.test.assertEquals
 
-class CheckOutTest {
-    @Test
-    /**
-     *
+/**
+ *
     Item   Unit      Special
            Price     Price
     --------------------------
@@ -13,14 +11,17 @@ class CheckOutTest {
     B       30       2 for 45
     C       20
     D       15
-     */
+ */
+class CheckOutTest {
+    @Test
+
     fun testPrice() {
-        val co = CheckOut(mapOf("A" to 50, "B" to 30, "C" to 20, "D" to 15),
+        val co = CheckOut(mutableMapOf("A" to 50, "B" to 30, "C" to 20, "D" to 15),
         listOf(Triple("A", 3, 130), Triple("B", 2, 45)))
 
-        assertEquals(  0, co.price(""))
-        assertEquals( 50, co.price("A"))
-        assertEquals( 80, co.price("AB"))
+        assertEquals(0, co.price(""))
+        assertEquals(50, co.price("A"))
+        assertEquals(80, co.price("AB"))
         assertEquals(115, co.price("CDBA"))
 
         assertEquals(100, co.price("AA"))
@@ -37,23 +38,24 @@ class CheckOutTest {
 
     @Test
     fun testScan() {
-        val co = CheckOut(mapOf("A" to 50, "B" to 30, "C" to 20, "D" to 15),
+        val co = CheckOut(mutableMapOf("A" to 50, "B" to 30, "C" to 20, "D" to 15),
                 listOf(Triple("A", 3, 130), Triple("B", 2, 45)))
-        assertEquals(  0, co.total())
 
-        co.scan("A");
-        assertEquals( 50, co.total())
+        assertEquals(0, co.total)
 
-        co.scan("B");
-        assertEquals( 80, co.total())
+        co.scan("A")
+        assertEquals(50, co.total)
 
-        co.scan("A");
-        assertEquals(130, co.total())
+        co.scan("B")
+        assertEquals(80, co.total)
 
-        co.scan("A");
-        assertEquals(160, co.total())
+        co.scan("A")
+        assertEquals(130, co.total)
 
-        co.scan("B");
+        co.scan("A")
+        assertEquals(160, co.total)
+
+        co.scan("B")
         assertEquals(175, co.total)
     }
 }
