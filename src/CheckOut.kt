@@ -10,7 +10,9 @@ class CheckOut(private val unitRule: MutableMap<String, Int>, private val specia
      * return price according to items passed
      */
     fun price(items: String): Int {
+        // make blank map to record items count
         val itemMap = recordItemCount(items, mutableMapOf())
+        // return calculated total price
         return calculatePrice(itemMap)
     }
 
