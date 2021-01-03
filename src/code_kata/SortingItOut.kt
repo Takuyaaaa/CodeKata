@@ -18,21 +18,38 @@ class Rack {
      * sort list by bubble sort algorithm
      */
     private fun MutableList<Int>.bubbleSort(): MutableList<Int> {
-        val list = this.reversAsMutable()
-        list.forEachIndexed { index, num ->
-            if (list.lastIndex >= index+1) {
-                if (num < list[index+1]) {
-                    list[index] = list[index+1]
-                    list[index+1] = num
+        return this.reversAsMutable().processBubbleSort().reversAsMutable()
+    }
+
+    /**
+     * process bubble sort algorithm
+     */
+    private fun MutableList<Int>.processBubbleSort(): MutableList<Int> {
+        this.forEachIndexed { index, num ->
+            // if passed index is accepted according to list size...
+            if (this.isIndexAccepted(index)) {
+                val nextNum = this[index+1]
+                if (num < nextNum) {
+                    // swap each position to sort
+                    this[index] = nextNum
+                    this[index+1] = num
                 }
             }
         }
-
-
-        return  list.reversAsMutable()
+        return this
     }
 
-    fun MutableList<Int>.reversAsMutable(): MutableList<Int> {
+    /**
+     * is index accepted according to list size
+     */
+    private fun MutableList<Int>.isIndexAccepted(index: Int): Boolean {
+        return this.lastIndex >= index+1
+    }
+
+    /**
+     * reverse list and make it as mutableList
+     */
+    private fun MutableList<Int>.reversAsMutable(): MutableList<Int> {
         return this.reversed().toMutableList()
     }
 }
