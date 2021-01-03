@@ -1,6 +1,8 @@
-import com.code_kata.KarateChop.Companion.libraryChop
-import com.code_kata.KarateChop.Companion.iteratorChop
-import com.code_kata.KarateChop.Companion.recursiveChop
+package code_kata
+
+import com.code_kata.code_kata.KarateChop.Companion.libraryChop
+import com.code_kata.code_kata.KarateChop.Companion.iteratorChop
+import com.code_kata.code_kata.KarateChop.Companion.recursiveChop
 import org.junit.Test
 import kotlin.test.assertEquals
 

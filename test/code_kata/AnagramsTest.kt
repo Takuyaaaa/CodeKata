@@ -1,4 +1,6 @@
-import com.code_kata.Anagrams.Companion.extractAllAnagrams
+package code_kata
+
+import com.code_kata.code_kata.Anagrams.Companion.extractAllAnagrams
 import org.junit.Test
 import java.io.File
 import kotlin.test.assertTrue

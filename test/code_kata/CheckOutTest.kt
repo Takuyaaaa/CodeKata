@@ -1,4 +1,6 @@
-import com.code_kata.CheckOut
+package code_kata
+
+import com.code_kata.code_kata.CheckOut
 import org.junit.Test
 import kotlin.test.assertEquals
 
