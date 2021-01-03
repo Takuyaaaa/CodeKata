@@ -2,7 +2,7 @@ package com.code_kata.code_kata
 
 class Rack {
     // balls stored at Rack instance by "add" method
-    val balls = mutableListOf<Int>()
+    var balls = mutableListOf<Int>()
 
     /**
      * store ball number at "balls" in the sorted order
@@ -11,24 +11,26 @@ class Rack {
         balls.add(ball)
 
         // balls.sort() will do, but this time try to implement by scratch
-        balls.bubbleSort()
+        balls = balls.bubbleSort()
     }
 
     /**
      * sort list by bubble sort algorithm
      */
-    private fun MutableList<Int>.bubbleSort() {
-        this.mapIndexed { index, num ->
-            // from the bottom, compare a number to next number
-            this.slice(index..this.lastIndex)
-                    .reversed().forEach { newtNum ->
-                        // if number is bigger than next number, swap their positions
-                        if (newtNum < num) {
-                            this[index] = newtNum
-                            this[index+1] = num
-                        }
-                    }
+    private fun MutableList<Int>.bubbleSort(): MutableList<Int> {
+        val list = this.reversed().toMutableList()
+        list.forEachIndexed { index, num ->
+
+            if (list.lastIndex >= index+1) {
+                if (num < list[index+1]) {
+                    list[index] = list[index+1]
+                    list[index+1] = num
+                }
+            }
         }
+
+
+        return  list.reversed().toMutableList()
     }
 }
 
