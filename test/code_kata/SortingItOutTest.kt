@@ -7,7 +7,7 @@ import kotlin.test.assertEquals
 
 class SortingItOutTest {
     @Test
-    fun testRuck() {
+    fun testRack() {
         val rack = Rack()
 
         assertEquals(mutableListOf(), rack.balls)
@@ -18,24 +18,27 @@ class SortingItOutTest {
         rack.add(10)
         assertEquals(mutableListOf(10, 20), rack.balls)
 
-        rack.add(15)
-        assertEquals(mutableListOf(10, 15, 20), rack.balls)
+        rack.add(9)
+        assertEquals(mutableListOf(9, 10, 20), rack.balls)
 
         rack.add(30)
-        assertEquals(mutableListOf(10, 15, 20, 30), rack.balls)
+        assertEquals(mutableListOf(9, 10, 20, 30), rack.balls)
 
         rack.add(21)
-        assertEquals(mutableListOf(10, 15, 20, 21 ,30), rack.balls)
+        assertEquals(mutableListOf(9, 10, 20, 21 ,30), rack.balls)
 
         rack.add(11)
-        assertEquals(mutableListOf(10, 11, 15, 20, 21 ,30), rack.balls)
+        assertEquals(mutableListOf(9, 10, 11, 20, 21 ,30), rack.balls)
 
         rack.add(31)
-        assertEquals(mutableListOf(10, 11, 15, 20, 21 ,30, 31), rack.balls)
+        assertEquals(mutableListOf(9, 10, 11, 20, 21 ,30, 31), rack.balls)
+
+        rack.add(0)
+        assertEquals(mutableListOf(0, 9, 10, 11, 20, 21 ,30, 31), rack.balls)
     }
 
     @Test
-    fun testChars() {
+    fun testSentence() {
         val sentence = Sentence(
                 "When not studying nuclear physics, Bambi likes to play beach volleyball."
         )

@@ -18,32 +18,9 @@ class Rack {
      * sort list by bubble sort algorithm
      */
     private fun MutableList<Int>.bubbleSort(): MutableList<Int> {
-        return this.reversAsMutable().processBubbleSort().reversAsMutable()
-    }
-
-    /**
-     * process bubble sort algorithm
-     */
-    private fun MutableList<Int>.processBubbleSort(): MutableList<Int> {
-        this.forEachIndexed { index, num ->
-            // if passed index is accepted according to list size...
-            if (this.isIndexAccepted(index)) {
-                val nextNum = this[index+1]
-                if (num < nextNum) {
-                    // swap each position to sort
-                    this[index] = nextNum
-                    this[index+1] = num
-                }
-            }
-        }
-        return this
-    }
-
-    /**
-     * is index accepted according to list size
-     */
-    private fun MutableList<Int>.isIndexAccepted(index: Int): Boolean {
-        return this.lastIndex >= index+1
+        return this.reversAsMutable()
+                .processBubbleSort()
+                .reversAsMutable()
     }
 
     /**
@@ -52,12 +29,31 @@ class Rack {
     private fun MutableList<Int>.reversAsMutable(): MutableList<Int> {
         return this.reversed().toMutableList()
     }
+
+    /**
+     * process bubble sort algorithm
+     */
+    private fun MutableList<Int>.processBubbleSort(): MutableList<Int> {
+        this.forEachIndexed { index, num ->
+            if (this.lastIndex == index) {
+                return@forEachIndexed
+            }
+
+            val nextNum = this[index+1]
+            if (num < nextNum) {
+                // swap each position to sort
+                this[index] = nextNum
+                this[index+1] = num
+            }
+        }
+        return this
+    }
 }
 
 
 class Sentence(private val sentence: String) {
     /**
-     * make "sentence" sorted and remove punctuations
+     * make "sentence" sorted alphabetically and remove punctuations
      */
     fun extractSortedChars(): String {
         return sentence.replace(" ", "")
@@ -65,7 +61,7 @@ class Sentence(private val sentence: String) {
                 .map { it.toLowerCase() }
                 // sort alphabetically
                 .sortedBy { it }
-                // make list to String
+                // make List to String
                 .joinToString("")
     }
 
