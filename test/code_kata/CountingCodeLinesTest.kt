@@ -21,4 +21,12 @@ class CountingCodeLinesTest {
 
         assertEquals(5, count)
     }
+
+    @Test
+    fun testCount3() {
+        val count = File("src/code_kata/CountingCodeLines.kt")
+                .countCodeLines()
+
+        assertEquals(39, count)
+    }
 }
