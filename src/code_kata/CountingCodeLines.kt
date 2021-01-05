@@ -25,14 +25,14 @@ class CountingCodeLines {
             return this.filter {
                 when {
                     // when it starts, flag turns into true and the line would be excluded
-                    it.multipleLinesCommentStarts() -> {
+                    it.multipleLinesCommentStarts(inMultipleLinesComments) -> {
                         inMultipleLinesComments = true
-                        return@filter false
+                        return@filter it.beforeCodeExists()
                     }
 
                     // when it ends, flag turns into false and the line would be excluded
                     // if there is no actual code after ending of multiple lines comment
-                    it.multipleLinesCommentEnds() -> {
+                    it.multipleLinesCommentEnds(inMultipleLinesComments) -> {
                         inMultipleLinesComments = false
                         return@filter it.afterCodeExists()
                     }
@@ -46,14 +46,22 @@ class CountingCodeLines {
         /**
          * if multiple lines comment starts
          */
-        private fun String.multipleLinesCommentStarts(): Boolean =
-                this.split("/**")[0].isBlank()
+        private fun String.multipleLinesCommentStarts(inMultipleLinesComments: Boolean): Boolean =
+                this.contains("/**") && !inMultipleLinesComments
 
         /**
          * if multiple lines comment ends
          */
-        private fun String.multipleLinesCommentEnds(): Boolean =
-                this.contains("*/")
+        private fun String.multipleLinesCommentEnds(inMultipleLinesComments: Boolean): Boolean =
+                this.contains("*/") && inMultipleLinesComments
+
+        /**
+         * if there is no actual code before starting of multiple lines comment
+         */
+        private fun String.beforeCodeExists(): Boolean  {
+            val beforeCode = this.split("/**")[0]
+            return beforeCode.isNotBlank() && beforeCode.isNotOneLineComment()
+        }
 
         /**
          * if there is no actual code after ending of multiple lines comment
@@ -66,7 +74,10 @@ class CountingCodeLines {
         /**
          * if the line is one line comment
          */
-        private fun String.isNotOneLineComment(): Boolean =
-                this.split("//")[0].isNotBlank()
+        private fun String.isNotOneLineComment(): Boolean  {
+            return  this.split("//")[0].isNotBlank()
+                    && this.split("/*")[0].isNotBlank()
+                    && this.split("*/").last().isNotBlank()
+        }
     }
 }

@@ -10,7 +10,6 @@ class CountingCodeLinesTest {
     fun testCount1() {
         val count = File("resources/CountTarget1.kt")
                 .countCodeLines()
-
         assertEquals(3, count)
     }
 
@@ -18,7 +17,6 @@ class CountingCodeLinesTest {
     fun testCount2() {
         val count = File("resources/CountTarget2.kt")
                 .countCodeLines()
-
         assertEquals(5, count)
     }
 
@@ -26,7 +24,6 @@ class CountingCodeLinesTest {
     fun testCount3() {
         val count = File("src/code_kata/CountingCodeLines.kt")
                 .countCodeLines()
-
-        assertEquals(39, count)
+        assertEquals(44, count)
     }
 }
