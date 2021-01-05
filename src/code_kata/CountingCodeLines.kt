@@ -6,42 +6,51 @@ class CountingCodeLines {
     companion object {
         fun File.countCodeLines(): Int {
             return readLines()
+                    .excludeBlankLine()
                     .excludeMultipleLinesComment()
                     .excludeOneLineComment()
                     .count()
         }
 
-        private fun List<String>.excludeOneLineComment(): List<String> {
-            return this.filter {
-                it.split("//")[0].isNotBlank()
-            }
-        }
+        private fun List<String>.excludeBlankLine(): List<String> =
+                this.filter { it.isNotBlank() }
+
+        private fun List<String>.excludeOneLineComment(): List<String> =
+            this.filter { it.split("//")[0].isNotBlank() }
+
+
 
         private fun List<String>.excludeMultipleLinesComment(): List<String> {
-            var flag = false
+            var inMultipleLinesComments = false
             return this.filter {
-                if (it.isBlank()) {
-                    return@filter false
-                }
+                when {
+                    it.multipleLinesCommentStarts() -> {
+                        inMultipleLinesComments = true
+                        return@filter false
+                    }
 
-                if (it.split("/**")[0].isBlank()) {
-                    flag = true
-                    return@filter false
-                }
+                    it.multipleLinesCommentEnds() -> {
+                        inMultipleLinesComments = false
+                        return@filter it.afterCodeExists()
+                    }
 
-                if (it.contains("*/") && it.split("*/").last().isBlank()) {
-                    flag = false
-                    return@filter false
+                    else -> return@filter !inMultipleLinesComments
                 }
-
-                if (flag) {
-                    return@filter false
-                }
-
-                true
             }
         }
+
+        private fun String.multipleLinesCommentStarts(): Boolean =
+                this.split("/**")[0].isBlank()
+
+        private fun String.multipleLinesCommentEnds(): Boolean =
+                this.contains("*/")
+
+        private fun String.afterCodeExists(): Boolean  {
+            val afterCode = this.split("*/").last()
+            return afterCode.isNotBlank() && afterCode.isNotSingleLineComment()
+        }
+
+        private fun String.isNotSingleLineComment(): Boolean =
+                this.split("//")[0].isNotBlank()
     }
-
-
 }
