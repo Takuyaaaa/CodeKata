@@ -1,6 +1,6 @@
-package code_kata
+package kata
 
-import com.code_kata.code_kata.CheckOut
+import com.code_kata.kata.CheckOut
 import org.junit.Test
 import kotlin.test.assertEquals
 

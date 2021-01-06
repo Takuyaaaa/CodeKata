@@ -1,4 +1,4 @@
-package com.code_kata.code_kata
+package com.code_kata.kata
 
 import java.io.File
 import kotlin.math.absoluteValue

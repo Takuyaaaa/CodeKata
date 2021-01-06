@@ -1,4 +1,4 @@
-package com.code_kata.code_kata
+package com.code_kata.kata
 
 class Rack {
     // balls stored at Rack instance by "add" method

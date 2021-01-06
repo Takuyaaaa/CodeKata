@@ -1,4 +1,4 @@
-package com.code_kata.code_kata
+package com.code_kata.kata
 
 class CheckOut(private val unitRule: MutableMap<String, Int>, private val specialRule: List<Triple<String, Int, Int>> = listOf()) {
     // map which stores items scanned with "scan" method

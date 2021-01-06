@@ -1,6 +1,6 @@
-package code_kata
+package kata
 
-import com.code_kata.code_kata.CountingCodeLines.Companion.countCodeLines
+import com.code_kata.kata.CountingCodeLines.Companion.countCodeLines
 import org.junit.Test
 import java.io.File
 import kotlin.test.assertEquals

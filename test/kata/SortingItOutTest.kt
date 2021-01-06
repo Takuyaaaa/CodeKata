@@ -1,7 +1,7 @@
-package code_kata
+package kata
 
-import com.code_kata.code_kata.Rack
-import com.code_kata.code_kata.Sentence
+import com.code_kata.kata.Rack
+import com.code_kata.kata.Sentence
 import org.junit.Test
 import kotlin.test.assertEquals
 

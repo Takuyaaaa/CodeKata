@@ -1,6 +1,6 @@
-package code_kata
+package kata
 
-import com.code_kata.code_kata.BloomFilters
+import com.code_kata.kata.BloomFilters
 import org.junit.Test
 import java.io.File
 import kotlin.test.assertFalse
