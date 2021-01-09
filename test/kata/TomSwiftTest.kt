@@ -1,26 +1,26 @@
 package kata
 
 import com.code_kata.kata.Trigram
-import com.code_kata.kata.Trigram.Companion.getLastTwoWords
-import com.code_kata.kata.Trigram.Companion.getNextWord
 import org.junit.Test
+import java.io.File
 
 class TomSwiftTest {
     @Test
-    fun testTrigram() {
+    fun testTrigram1() {
         val trigram = Trigram("I wish I may I wish I might")
 
-        val dict = trigram.generateWordMap()
-        val generatedStory = trigram.getFirstTwoWords()
+        trigram.execute(6)
+        println(trigram.joinToStringBySpace())
+    }
 
-        var count = 0
+    @Test
+    fun testTrigram2() {
+        val story = File("resources/TomSwift.txt")
+                .readText()
 
-        while (count < 10) {
-            val lastTwoWords = generatedStory.getLastTwoWords()
-            val nextWord = dict.getNextWord(lastTwoWords)
-            generatedStory += nextWord
-            count ++
-        }
-        println(generatedStory.joinToString(" "))
+        val trigram = Trigram(story)
+
+        trigram.execute(100)
+        println(trigram.joinToStringBySpace())
     }
 }
