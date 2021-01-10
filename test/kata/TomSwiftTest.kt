@@ -10,17 +10,13 @@ class TomSwiftTest {
         val trigram = Trigram("I wish I may I wish I might")
 
         trigram.execute(6)
-        println(trigram.joinToStringBySpace())
     }
 
     @Test
     fun testTrigram2() {
-        val story = File("resources/TomSwift.txt")
-                .readText()
-
+        val story = File("resources/TomSwift.txt").readText()
         val trigram = Trigram(story)
 
-        trigram.execute(100)
-        println(trigram.joinToStringBySpace())
+        trigram.execute(1000)
     }
 }
