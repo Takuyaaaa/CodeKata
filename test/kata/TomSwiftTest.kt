@@ -9,7 +9,7 @@ class TomSwiftTest {
     fun testTrigram1() {
         val trigram = Trigram("I wish I may I wish I might")
 
-        trigram.execute(8)
+        trigram.execute(10)
     }
 
     @Test

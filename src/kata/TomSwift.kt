@@ -18,23 +18,19 @@ class Trigram(sentence: String) {
                 .groupBy ({ "${it[0]} ${it[1]}" }, {it[2]})
 
     /**
-     * execute trigram algorithm repeatedly "times" times
+     * execute trigram algorithm repeatedly until sentence size reaches "length"
      */
-    fun execute(times: Int) {
-        var count = 0
-
-        while (count < times) {
+    fun execute(length: Int) {
+        while (generatedSentence.size < length) {
             try {
                 // when the nextWord has valid word option to be followed,
                 // pick that word and add that word to "generatedSentence"
                 val nextWord = getNextWord(getLastTwoWords())
                 generatedSentence.add(nextWord)
-                count ++
             } catch (e: IllegalArgumentException) {
                 // when the nextWord doesn't have valid word option to be followed,
                 // rollback "generatedSentence" to one step before and undo one count
                 generatedSentence.removeLast()
-                count --
                 continue
             }
         }
