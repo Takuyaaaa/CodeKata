@@ -1,28 +1,16 @@
 package com.code_kata.kata
 
 class Dependencies {
-    val dependencyMap = mutableMapOf<String, List<String>>()
-    val dependencyResult = mutableMapOf<String, MutableList<String>>()
+    private val directDependencies = mutableMapOf<String, MutableList<String>>()
+    private val dependencyResult = mutableMapOf<String, MutableList<String>>()
 
-    fun addDirect(file: String, dependencies: List<String>) {
-        dependencyMap[file] = dependencies
+    fun addDirect(file: String, dependencies: MutableList<String>) {
+        directDependencies[file] = dependencies
     }
 
-    fun processCheck(file: String, list: MutableList<String>) {
-        try {
-            val deps = dependencyMap.getByKey(file)
-            deps.forEach {
-                list.add(it)
-                processCheck(it, list)
-            }
-        } catch (e: IllegalArgumentException) {
-
-        }
-    }
-
-    fun checkDependencies() {
+    private fun checkDependencies() {
         val map = mutableMapOf<String, MutableList<String>>()
-        dependencyMap
+        directDependencies
                 .forEach {
                     val list = mutableListOf<String>()
                     processCheck(it.key, list)
@@ -33,14 +21,29 @@ class Dependencies {
             values.sort()
             dependencyResult[it.key] = values
         }
-        println(dependencyResult)
+    }
+
+    private fun processCheck(file: String, list: MutableList<String>) {
+        try {
+            directDependencies.getByKey(file).forEach {
+                list.add(it)
+                processCheck(it, list)
+            }
+        } catch (e: IllegalArgumentException) {
+            // do nothing
+        }
+    }
+
+    fun dependenciesFor(file: String): List<String> {
+        checkDependencies()
+        return dependencyResult.getByKey(file)
     }
 
     companion object {
         /**
          * get value by key assuring return type is "List<String>", not "List<String>?"
          */
-        private fun MutableMap<String, List<String>>.getByKey(key: String): List<String> {
+        private fun MutableMap<String, MutableList<String>>.getByKey(key: String): List<String> {
             return this[key] ?: throw IllegalArgumentException("invalid item passed: $key")
         }
     }
