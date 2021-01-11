@@ -22,4 +22,16 @@ class DependenciesTest {
         assertEquals(mutableListOf("F", "H"), dep.dependenciesFor("E"))
         assertEquals(mutableListOf("H"), dep.dependenciesFor("F"))
     }
+
+    @Test
+    fun testCircularDependencies() {
+        val dep = Dependencies()
+        dep.addDirect("A", mutableListOf("B"))
+        dep.addDirect("B", mutableListOf("C"))
+        dep.addDirect("C", mutableListOf("A"))
+
+        assertEquals(mutableListOf("A", "B", "C"), dep.dependenciesFor("A"))
+        assertEquals(mutableListOf("A", "B", "C"), dep.dependenciesFor("B"))
+        assertEquals(mutableListOf("A", "B", "C"), dep.dependenciesFor("C"))
+    }
 }
