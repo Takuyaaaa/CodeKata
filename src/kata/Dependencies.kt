@@ -39,7 +39,8 @@ class Dependencies {
     private fun executeCheck(file: String, list: MutableList<String>) {
         try {
             directDependencies.getByKey(file).forEach {
-                if (list.isCircular(it)) throw IllegalStateException("Circular dependencies detected for the file; $file")
+                if (list.isCircular(it))
+                    throw IllegalStateException("Circular dependencies detected for the file; $file")
                 list.add(it)
                 executeCheck(it, list)
             }
