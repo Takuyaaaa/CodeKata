@@ -16,6 +16,14 @@ class Dependencies {
     }
 
     /**
+     * check all dependencies and return files depended by passed "file"
+     */
+    fun dependenciesFor(file: String): List<String> {
+        checkDependencies()
+        return allDependencies.getByKey(file)
+    }
+
+    /**
      * by referring "directDependencies", check all dependencies
      * including transitive ones and store them to "allDependencies"
      */
@@ -52,16 +60,7 @@ class Dependencies {
             // when "IllegalStateException" occur, that means passed "file" must have
             // circular dependencies as relationships, so we do nothing for that case
             // but finishing recursive method call
-
         }
-    }
-
-    /**
-     * check all dependencies and return files depended by passed "file"
-     */
-    fun dependenciesFor(file: String): List<String> {
-        checkDependencies()
-        return allDependencies.getByKey(file)
     }
 
     companion object {
