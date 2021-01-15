@@ -5,9 +5,20 @@ import org.junit.Test
 
 class WordChainsTest {
     @Test
-    fun testWordChains() {
+    fun testWordChains1() {
         val wordChains = WordChains("cat", "dog")
+        wordChains.executeWordChains()
+    }
 
-        wordChains.process()
+    @Test
+    fun testWordChains2() {
+        val wordChains = WordChains("lead", "gold")
+        wordChains.executeWordChains()
+    }
+
+    @Test
+    fun testWordChains3() {
+        val wordChains = WordChains("ruby", "code")
+        wordChains.executeWordChains()
     }
 }

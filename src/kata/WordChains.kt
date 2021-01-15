@@ -2,20 +2,25 @@ package com.code_kata.kata
 
 import java.io.File
 
-class WordChains(val start: String, val end: String) {
-    private val words_list = File("resources/wordlist_10000_MIT.txt").readLines()
+class WordChains(private val start: String, private val end: String) {
+    private val wordList = File("resources/wordlist_for_word_chains.txt").readLines()
 
-    fun process() {
-        val candidateWords = words_list
+    fun executeWordChains() {
+        val wordOptions = wordList
                 .asSequence()
                 .filter { it.length == start.length }
                 .filter { it != start }
                 .map { it.toList() }
-                .toList()
+                .toMutableList()
 
-        val markedWords = candidateWords
+        searchNextWord(wordOptions, start)
+    }
+
+    private fun searchNextWord(wordOptions: MutableList<List<Char>>, baseWord: String) {
+        println(baseWord)
+        val markedWords = wordOptions
                 .asSequence()
-                .map { it.oneCharDiff(start.toList()) }
+                .map { it.oneCharDiff(baseWord.toList()) }
                 .map { it.getByKey(false).count() }
                 .mapIndexed { index, count ->
                     if (count == 1) return@mapIndexed index
@@ -23,10 +28,15 @@ class WordChains(val start: String, val end: String) {
                 }
                 .toList()
 
-        val targetIndex = markedWords.find { it != -1 }
 
-        // todo: not using !!
-        println(candidateWords[targetIndex!!].joinToString(""))
+        val targetIndex = markedWords.find { it != -1 } ?: throw NullPointerException("no match!")
+        val targetWord = wordOptions[targetIndex].joinToString("")
+
+        wordOptions.removeAt(targetIndex)
+        when (targetWord) {
+            end -> println(targetWord)
+            else -> searchNextWord(wordOptions, targetWord)
+        }
     }
 }
 
