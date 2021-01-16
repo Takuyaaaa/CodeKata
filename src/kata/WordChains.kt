@@ -35,15 +35,15 @@ class WordChains(private val start: String, private val end: String) {
         wordResult.add(baseWord)
         val examinedList = examineWordOptions(wordOptions, baseWord)
         // get index pointing to next word
-        val targetIndex = examinedList.getTargetIndex()
-        val targetWord = wordOptions[targetIndex].joinToString("")
+        val nextIndex = examinedList.getTargetIndex()
+        val nextWord = wordOptions[nextIndex].joinToString("")
 
         // remove word picked as next word to continue processing recursively
-        wordOptions.removeAt(targetIndex)
-        when (targetWord) {
+        wordOptions.removeAt(nextIndex)
+        when (nextWord) {
             // when "targetWord" is matched to "end", finish recursive calling
-            end -> wordResult.add(targetWord)
-            else -> searchNextWord(wordOptions, targetWord)
+            end -> wordResult.add(nextWord)
+            else -> searchNextWord(wordOptions, nextWord)
         }
     }
 
