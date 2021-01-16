@@ -106,6 +106,47 @@ public class Hello {
 }
 ```
 
+* [Kata14: Tom Swift Under the Milkwood](http://codekata.com/kata/kata14-tom-swift-under-the-milkwood/)
+> Trigram analysis is very simple. Look at each set of three adjacent words in a document. Use the first two words of the set as a key, and remember the fact that the third word followed that key. Once you’ve finished, you know the list of individual words that can follow each two word sequence in the document. For example, given the input:
+>
+```
+I wish I may I wish I might
+```
+You might generate:
+>
+```
+"I wish" => ["I", "I"]
+"wish I" => ["may", "might"]
+"may I"  => ["wish"]
+"I may"  => ["I"]
+```
+This says that the words “I wish” are twice followed by the word “I”, the words “wish I” are followed once by “may” and once by “might” and so on.
+To generate new text from this analysis, choose an arbitrary word pair as a starting point. Use these to look up a random next word (using the table above) and append this new word to the text so far. This now gives you a new word pair at the end of the text, so look up a potential next word based on these. Add this to the list, and so on.....
+
+* [Kata18: Transitive Dependencies](http://codekata.com/kata/kata18-transitive-dependencies/)
+> Let’s write some code that calculates how dependencies propagate between things such as classes in a program.
+......
+One of the insidious things about dependencies is that they are transitive—if A depends on B and B depends on C, then A also depends on C. So, let’s write some code that calculates the full set of dependencies for a group of items. The code takes as input a set of lines where the first token is the name of an item. The remaining tokens are the names of things that this first item depends on. Given the following input, we know that A directly depends on B and C, B depends on C and E, and so on.
+>
+```
+  A   B   C
+  B   C   E
+  C   G
+  D   A   F
+  E   F
+  F   H
+```
+The program should use this data to calculate the full set of dependencies. For example, looking at B, we see it directly depends on C and E. C in turn relies on G, E relies on F, and F relies on H. This means that B ultimately relies on C, E, F, G, and H. In fact, the full set of dependencies for the previous example is:
+>
+```
+  A   B C E F G H
+  B   C E F G H
+  C   G
+  D   A B C E F G H
+  E   F H
+  F   H
+```
+
 # Note
 
 The Copyright of the content of [CodeKata](http://codekata.com/) must be attributed to  Dave Thomas.
