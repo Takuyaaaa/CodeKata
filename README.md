@@ -158,6 +158,45 @@ dog
 ```
 > The objective of this kata is to write a program that accepts start and end words and, using words from the dictionary, builds a word chain between them. For added programming fun, return the shortest word chain that solves each puzzle. For example, you can turn “lead” into “gold” in four steps (lead, load, goad, gold), and “ruby” into “code” in six steps (ruby, rubs, robs, rods, rode, code).
 
+* [Kata21:Simple Lists](http://codekata.com/kata/kata21-simple-lists/)
+> For this kata we’re going to code up three implementations of a list that has the following basic interface:
+
+>
+* The list consists of nodes. Each node has a string value, along with whatever housekeeping the list itself needs.
+* New nodes are added to the end of the list.
+* You can ask the list if it contains a given string. If it does, it returns the node containing that string.
+* You can delete a node from the list.
+* You can ask the list to return an array of all its values.
+Here’s a basic set of unit tests to illustrate the behavior.
+
+>
+```ruby
+list = List.new
+assert_nil(list.find("fred"))
+list.add("fred")
+assert_equal("fred", list.find("fred").value())
+assert_nil(list.find("wilma"))
+list.add("wilma")
+assert_equal("fred",  list.find("fred").value())
+assert_equal("wilma", list.find("wilma").value())
+assert_equal(["fred", "wilma"], list.values())
+>
+list = List.new
+list.add("fred")
+list.add("wilma")
+list.add("betty")
+list.add("barney")
+assert_equal(["fred", "wilma", "betty", "barney"], list.values())
+list.delete(list.find("wilma"))
+assert_equal(["fred", "betty", "barney"], list.values())
+list.delete(list.find("barney"))
+assert_equal(["fred", "betty"], list.values())
+list.delete(list.find("fred"))
+assert_equal(["betty"], list.values())
+list.delete(list.find("betty"))
+assert_equal([], list.values())
+```
+
 # Note
 
 The Copyright of the content of [CodeKata](http://codekata.com/) must be attributed to  Dave Thomas.
