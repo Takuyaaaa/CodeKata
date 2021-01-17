@@ -2,6 +2,7 @@ package kata
 
 import com.code_kata.kata.SinglyLinkedList
 import org.junit.Test
+import kotlin.test.assertEquals
 
 class SimpleListsTest {
 
@@ -9,12 +10,12 @@ class SimpleListsTest {
     fun test() {
         val list = SinglyLinkedList()
 
-        list.add("takuya")
-        list.add("Yasuko")
-        list.add("Tom")
-        list.add("Tom2")
+        list.add("fred")
+        list.add("wilma")
+        list.add("betty")
+        list.add("barney")
 
-        println(list.values())
+        assertEquals(listOf("fred", "wilma", "betty", "barney"), list.values())
 
     }
 }
