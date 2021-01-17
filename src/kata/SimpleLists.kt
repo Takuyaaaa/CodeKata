@@ -48,14 +48,13 @@ class SinglyLinkedList {
 
     fun values(): List<String>{
         val values = mutableListOf<String>()
-        var node: SingleNode = firstNode ?: return values
+        var node: SingleNode? = firstNode
 
         while (true) {
-            values.add(node.value)
-            if (node.next == null) break
-            // put !! calling as smart casting is not working as
-            // "firstNode" is var property
-            node = node.next!!
+            node?.value?.let { values.add(it) }
+            if (node?.next == null) break
+
+            node = node.next
         }
 
         return values
