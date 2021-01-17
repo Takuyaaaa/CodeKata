@@ -6,7 +6,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
 class SimpleListsTest {
-
     @Test
     fun testSinglyLinkedList1() {
         val list = SinglyLinkedList()

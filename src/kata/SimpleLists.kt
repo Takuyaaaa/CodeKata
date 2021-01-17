@@ -49,7 +49,12 @@ class SinglyLinkedList {
      */
     fun delete(targetNode: SingleNode) {
         var node: SingleNode? = firstNode
-        if (targetNode == node) firstNode = node.next
+        // if `firstNode` is `targetNode`, just delete that and
+        // return to finish the process
+        if (targetNode == node) {
+            firstNode = node.next
+            return
+        }
 
         while (true) {
             if (targetNode == node?.next) deleteNextNode(node)
