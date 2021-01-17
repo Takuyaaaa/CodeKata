@@ -30,22 +30,20 @@ class SinglyLinkedList {
     }
 
     fun delete(targetNode: SingleNode) {
-        var node: SingleNode = firstNode ?: return
-        if (targetNode == node) {
-            firstNode = node.next
-        }
-        while (true) {
+        var node: SingleNode? = firstNode
+        if (targetNode == node) firstNode = node.next
 
-            if (targetNode == node.next) {
-                // 削除処理
-                val nextNextNode = node.next?.next
-                node.next = nextNextNode
-            }
-            if (node.next == null) return
-            // put !! calling as smart casting is not working as
-            // "firstNode" is var property
-            node = node.next!!
+        while (true) {
+            if (targetNode == node?.next) deleteNextNode(node)
+            if (node?.next == null) return
+
+            node = node.next
         }
+    }
+
+    private fun deleteNextNode(node: SingleNode) {
+        val nextNextNode = node.next?.next
+        node.next = nextNextNode
     }
 
     fun values(): List<String>{
