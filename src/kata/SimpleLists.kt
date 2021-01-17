@@ -3,9 +3,7 @@ package com.code_kata.kata
 import java.lang.NullPointerException
 
 class SinglyLinkedList {
-    class SingleNode(val value: String, var next: SingleNode?) {
-        fun value() = this.value
-    }
+    data class SingleNode(val value: String, var next: SingleNode?)
     var firstNode: SingleNode? = null
 
     fun add(newValue: String) {
@@ -38,9 +36,28 @@ class SinglyLinkedList {
         }
     }
 
+    fun delete(targetNode: SingleNode) {
+        var node: SingleNode = firstNode ?: return
+        if (targetNode == node) {
+            firstNode = node.next
+        }
+        while (true) {
+
+            if (targetNode == node.next) {
+                // 削除処理
+                val nextNextNode = node.next?.next
+                node.next = nextNextNode
+            }
+            if (node.next == null) return
+            // put !! calling as smart casting is not working as
+            // "firstNode" is var property
+            node = node.next!!
+        }
+    }
+
     fun values(): List<String>{
         val values = mutableListOf<String>()
-        var node: SingleNode = firstNode ?: throw NullPointerException("NULL!!")
+        var node: SingleNode = firstNode ?: return values
 
         while (true) {
             values.add(node.value)
